@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="public, max-age=86400">
+    <meta name="theme-color" content="#000000">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <title>NoolShy Fame</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="black-theme">
+    
+
+    <div class="snow-container"></div>
+
+<nav class="top-nav">
+    <div class="nav-left">
+        <button class="menu-btn" id="menu-toggle">
+            <i class="fas fa-bars"></i>
+        </button>
+        <h1 class="logo text-neon-flow">NoolShy Fame</h1>
+    </div>
+    
+    <div class="nav-center">
+        <button class="nav-tab active" data-section="main">Главная</button>
+        <a href="https://t.me/NOOLSHY" class="nav-tab channel-link" target="_blank">
+            <i class="fab fa-telegram"></i> Мой канал
+        </a>
+    </div>
+    
+    <div class="nav-right">
+        <!-- Кнопка отправить заявку теперь для авторизованных -->
+        <button class="apply-btn neon-apply" id="apply-open-btn" title="Отправить заявку">
+            <i class="fas fa-paper-plane"></i> Отправить заявку
+        </button>
+        
+        <!-- Кнопки регистрации/входа/профиля -->
+        <div id="auth-buttons" style="display: none;">
+            <button class="nav-icon" id="register-btn" title="Регистрация">
+                <i class="fas fa-user-plus"></i>
+            </button>
+            <button class="nav-icon" id="login-btn" title="Вход">
+                <i class="fas fa-sign-in-alt"></i>
+            </button>
+        </div>
+        
+        <div id="user-menu" style="display: none;">
+            <button class="nav-icon" id="user-profile-btn" title="Профиль">
+                <i class="fas fa-user"></i>
+            </button>
+            <button class="nav-icon" id="logout-btn" title="Выход">
+                <i class="fas fa-sign-out-alt"></i>
+            </button>
+        </div>
+        
+        <button class="nav-icon" id="faq-btn" title="FAQ">
+            <i class="fas fa-question-circle"></i>
+        </button>
+        <button class="nav-icon" id="settings-btn" title="Настройки">
+            <i class="fas fa-cog"></i>
+        </button>
+    </div>
+</nav>
+   
+    <div class="side-menu" id="side-menu">
+        <div class="menu-header">
+            <h3>Меню</h3>
+            <button class="close-menu" id="close-menu">&times;</button>
+        </div>
+        <div class="menu-items">
+            <a href="#main" class="menu-item active" data-section="main">
+                <i class="fas fa-home"></i> Главная
+            </a>
+            <a href="#faq" class="menu-item">
+                <i class="fas fa-question-circle"></i> FAQ
+            </a>
+           
+            <div id="menu-auth-buttons" style="display: none;">
+                <button class="menu-item" id="menu-register">
+                    <i class="fas fa-user-plus"></i> Регистрация
+                </button>
+                <button class="menu-item" id="menu-login">
+                    <i class="fas fa-sign-in-alt"></i> Вход
+                </button>
+            </div>
+            
+            <div id="menu-user-options" style="display: none;">
+                <button class="menu-item" id="menu-apply">
+                    <i class="fas fa-paper-plane"></i> Отправить заявку
+                </button>
+                <button class="menu-item" id="menu-profile">
+                    <i class="fas fa-user"></i> Мой профиль
+                </button>
+                <button class="menu-item" id="menu-logout">
+                    <i class="fas fa-sign-out-alt"></i> Выход
+                </button>
+            </div>
+            
+            <button class="menu-item" id="menu-settings">
+                <i class="fas fa-sliders-h"></i> Настройки
+            </button>
+            
+            <!-- Ссылка на админ-панель для админов -->
+            <a href="/admin-panel/admin.html" class="menu-item" id="menu-admin" style="display: none;">
+                <i class="fas fa-shield-alt"></i> Админ-панель
+            </a>
+        </div>
+    </div>
+
+   
+    <section id="main" class="section active-section">
+        <div class="container">
+            <div class="search-container">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="search-input" placeholder="Поиск по имени, описанию...">
+                </div>
+<div class="filter-buttons">
+    <button class="filter-btn active" data-category="all">Все</button>
+    <button class="filter-btn" data-category="Владелец">Владелец</button>
+    <button class="filter-btn" data-category="Модераторы">Модераторы</button>
+    <button class="filter-btn" data-category="Медийки">Медийки</button>
+    <button class="filter-btn" data-category="Высокий фейм">Высокий фейм</button>
+    <button class="filter-btn" data-category="Средний фейм">Средний фейм</button>
+    <button class="filter-btn" data-category="Малый фейм">Малый фейм</button>
+    <button class="filter-btn" data-category="Гаранты">Гаранты</button>
+    <button class="filter-btn" data-category="Кодеры">Кодеры</button>
+    <button class="filter-btn" data-category="Скам">Скам</button>
+</div>
+            </div>
+
+            <div class="members-grid" id="members-container">
+             
+            </div>
+        </div>
+    </section>
+
+  
+    <section id="profile-details" class="section">
+        <div class="container" id="profile-content">
+           
+        </div>
+    </section>
+
+    <!-- НОВАЯ СЕКЦИЯ: Регистрация -->
+    <section id="register-section" class="section">
+        <div class="container">
+            <div class="auth-container">
+                <div class="auth-box neon-flow">
+                    <h2 class="text-neon-flow"><i class="fas fa-user-plus"></i> Регистрация</h2>
+                    
+                    <form id="register-form">
+                        <div class="form-group">
+                            <label for="register-username">Имя пользователя:</label>
+                            <input type="text" id="register-username" required 
+                                   placeholder="Введите имя пользователя" autocomplete="username">
+                            <div class="form-error" id="username-error"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="register-email">Email:</label>
+                            <input type="email" id="register-email" required 
+                                   placeholder="Введите email" autocomplete="email">
+                            <div class="form-error" id="email-error"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="register-password">Пароль:</label>
+                            <input type="password" id="register-password" required 
+                                   placeholder="Введите пароль (минимум 6 символов)" autocomplete="new-password">
+                            <div class="form-error" id="password-error"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="register-confirm-password">Подтвердите пароль:</label>
+                            <input type="password" id="register-confirm-password" required 
+                                   placeholder="Подтвердите пароль" autocomplete="new-password">
+                            <div class="form-error" id="confirm-password-error"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="register-telegram">Telegram username:</label>
+                            <input type="text" id="register-telegram" 
+                                   placeholder="@username (необязательно)" autocomplete="off">
+                        </div>
+                        
+                        <button type="submit" class="auth-btn" id="register-submit">
+                            <i class="fas fa-user-plus"></i> Зарегистрироваться
+                        </button>
+                        
+                        <div class="auth-links">
+                            Уже есть аккаунт? <a href="#" id="go-to-login">Войти</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- НОВАЯ СЕКЦИЯ: Вход -->
+    <section id="login-section" class="section">
+        <div class="container">
+            <div class="auth-container">
+                <div class="auth-box neon-flow">
+                    <h2 class="text-neon-flow"><i class="fas fa-sign-in-alt"></i> Вход</h2>
+                    
+                    <form id="login-form">
+                        <div class="form-group">
+                            <label for="login-username">Имя пользователя или Email:</label>
+                            <input type="text" id="login-username" required 
+                                   placeholder="Введите имя пользователя или email" autocomplete="username">
+                            <div class="form-error" id="login-username-error"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="login-password">Пароль:</label>
+                            <input type="password" id="login-password" required 
+                                   placeholder="Введите пароль" autocomplete="current-password">
+                            <div class="form-error" id="login-password-error"></div>
+                        </div>
+                        
+                        <div class="form-group remember-group">
+                            <label class="remember-label">
+                                <input type="checkbox" id="remember-me">
+                                <span>Запомнить меня</span>
+                            </label>
+                            <a href="#" id="forgot-password">Забыли пароль?</a>
+                        </div>
+                        
+                        <button type="submit" class="auth-btn" id="login-submit">
+                            <i class="fas fa-sign-in-alt"></i> Войти
+                        </button>
+                        
+                        <div class="auth-links">
+                            Нет аккаунта? <a href="#" id="go-to-register">Зарегистрироваться</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- НОВАЯ СЕКЦИЯ: Мой профиль -->
+    <section id="user-profile-section" class="section">
+        <div class="container">
+            <div class="profile-container" id="user-profile-content">
+                <!-- Загружается динамически -->
+            </div>
+        </div>
+    </section>
+
+    <!-- НОВАЯ СЕКЦИЯ: Отправка заявки -->
+    <section id="apply-section" class="section">
+        <div class="container">
+            <div class="auth-container">
+                <div class="auth-box neon-flow">
+                    <h2 class="text-neon-flow"><i class="fas fa-paper-plane"></i> Отправить заявку</h2>
+                    
+                    <form id="apply-form">
+                        <div class="form-group">
+                            <label for="apply-nickname">Никнейм для фейм-листа:</label>
+                            <input type="text" id="apply-nickname" required 
+                                   placeholder="Введите ваш никнейм">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="apply-telegram">Telegram username:</label>
+                            <input type="text" id="apply-telegram" required 
+                                   placeholder="@username">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="apply-category">Категория:</label>
+                            <select id="apply-category" required>
+                                <option value="">Выберите категорию</option>
+                                <option value="Малый фейм">Малый фейм</option>
+                                <option value="Средний фейм">Средний фейм</option>
+                                <option value="Высокий фейм">Высокий фейм</option>
+                                <option value="Гаранты">Гаранты</option>
+                                <option value="Кодеры">Кодеры</option>
+                                <option value="Медийки">Медийки</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="apply-description">Описание:</label>
+                            <textarea id="apply-description" rows="4" required 
+                                      placeholder="Расскажите о себе, ваших достижениях и почему вы должны быть в фейм-листе..."></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="apply-links">Дополнительные ссылки:</label>
+                            <textarea id="apply-links" rows="3" 
+                                      placeholder="Ваши проекты, соцсети, другие ссылки (каждая с новой строки)"></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="apply-avatar">Аватарка (опционально):</label>
+                            <input type="file" id="apply-avatar" accept="image/*">
+                            <div class="file-info" id="avatar-info"></div>
+                        </div>
+                        
+                        <div class="apply-notice">
+                            <p><i class="fas fa-info-circle"></i> После отправки заявки модераторы рассмотрят её в течение 24-48 часов</p>
+                        </div>
+                        
+                        <button type="submit" class="auth-btn" id="apply-submit">
+                            <i class="fas fa-paper-plane"></i> Отправить заявку
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="faq-section" class="section">
+        <div class="container">
+            <div class="faq-content">
+                <h2 class="text-neon-flow">FAQ</h2>
+                <p>По всем вопросам обращайтесь:</p>
+                <a href="https://t.me/NOOLSHY" class="profile-link" target="_blank">
+                    <i class="fab fa-telegram"></i> @NOOLSHY
+                </a>
+                <div class="price-info">
+                    <h3>Услуги и цены:</h3>
+                    <p>Вход в фейм-лист: <strong>50 зв</strong></p>
+                    <p>Галочка (верификация): <strong>30 зв</strong></p>
+                    <p>Закреп профиля: <strong>50 зв</strong></p>
+                    <p><em>Оплата только через Telegram</em></p>
+                    <div class="apply-section">
+                        <h3>Хочешь попасть в фейм-лист?</h3>
+                        <button class="apply-btn-large" id="faq-apply-btn">
+                            <i class="fas fa-paper-plane"></i> Отправить заявку
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <div class="modal" id="settings-modal">
+        <!-- ... существующий код модального окна настроек ... -->
+        <div class="modal-content neon-flow">
+            <div class="modal-header">
+                <h2 class="text-neon-flow"><i class="fas fa-sliders-h"></i> Настройки</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            
+            <div class="settings-tabs">
+                <button class="settings-tab active" data-tab="theme">Тема</button>
+                <button class="settings-tab" data-tab="background">Фон</button>
+                <button class="settings-tab" data-tab="neon">Неон</button>
+                <button class="settings-tab" data-tab="effects">Эффекты</button>
+            </div>
+            
+            <div class="settings-content">
+                <!-- ... существующее содержимое ... -->
+                <div class="tab-content active" id="theme-tab">
+                    <h3>Тема оформления</h3>
+                    <div class="theme-grid">
+                        <div class="theme-option" data-theme="dark">
+                            <div class="theme-preview dark-theme"></div>
+                            <span>Темная</span>
+                        </div>
+                        <div class="theme-option active" data-theme="black">
+                            <div class="theme-preview black-theme"></div>
+                            <span>Черная</span>
+                        </div>
+                        <div class="theme-option" data-theme="red">
+                            <div class="theme-preview red-theme"></div>
+                            <span>Красная</span>
+                        </div>
+                        <div class="theme-option" data-theme="red-black">
+                            <div class="theme-preview red-black-theme"></div>
+                            <span>Красно-черная</span>
+                        </div>
+                        <div class="theme-option" data-theme="red-gray">
+                            <div class="theme-preview red-gray-theme"></div>
+                            <span>Красно-серая</span>
+                        </div>
+                        <div class="theme-option" data-theme="purple">
+                            <div class="theme-preview purple-theme"></div>
+                            <span>Фиолетовая</span>
+                        </div>
+                        <div class="theme-option" data-theme="blue">
+                            <div class="theme-preview blue-theme"></div>
+                            <span>Синяя</span>
+                        </div>
+                        <div class="theme-option" data-theme="green">
+                            <div class="theme-preview green-theme"></div>
+                            <span>Зеленая</span>
+                        </div>
+                        <div class="theme-option" data-theme="orange">
+                            <div class="theme-preview orange-theme"></div>
+                            <span>Оранжевая</span>
+                        </div>
+                        <div class="theme-option" data-theme="pink">
+                            <div class="theme-preview pink-theme"></div>
+                            <span>Розовая</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="background-tab">
+                    <h3>Фон главной страницы</h3>
+                    <div class="background-upload">
+                        <input type="file" id="bg-upload" accept="image/*" style="display: none;">
+                        <label for="bg-upload" class="upload-btn neon-flow">
+                            <i class="fas fa-image"></i> Выбрать изображение
+                        </label>
+                        <div id="bg-preview" class="bg-preview"></div>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="neon-tab">
+                    <h3>Настройки неона</h3>
+                    <div class="neon-controls">
+                        <div class="control-group">
+                            <label for="neon-color">Цвет неона:</label>
+                            <input type="color" id="neon-color" value="#808080">
+                            <div class="color-preview" id="neon-color-preview"></div>
+                        </div>
+                        <div class="control-group">
+                            <label for="neon-intensity">Интенсивность (1-100):</label>
+                            <input type="range" id="neon-intensity" min="1" max="100" value="50">
+                            <span id="intensity-value">50%</span>
+                        </div>
+                        <div class="control-group">
+                            <label for="neon-speed">Скорость анимации:</label>
+                            <input type="range" id="neon-speed" min="1" max="10" value="5">
+                            <span id="speed-value">Средняя</span>
+                        </div>
+                        <button class="neon-apply-btn" id="apply-neon">
+                            <i class="fas fa-bolt"></i> Применить неон
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="effects-tab">
+                    <h3>Эффекты</h3>
+                    <div class="effect-option">
+                        <div class="effect-info">
+                            <h4><i class="fas fa-snowflake"></i> Снег</h4>
+                            <p>Падающий снег на всём сайте</p>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" id="snow-effect" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="effect-option">
+                        <div class="effect-info">
+                            <h4><i class="fas fa-palette"></i> Эффект переливания</h4>
+                            <p>Анимированное переливание неона</p>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" id="neon-flow-effect" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно для сообщений -->
+    <div class="modal" id="message-modal">
+        <div class="modal-content neon-flow">
+            <div class="modal-header">
+                <h2 class="text-neon-flow" id="message-title"></h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p id="message-content"></p>
+            </div>
+            <div class="modal-footer">
+                <button class="auth-btn" id="message-close">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
